@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<title>Color scheme for main.css</title>
+<meta charset='utf-8'>
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  line-height: 1.4;
+  font-size: 1.2em;
+  color: #444;
+}
+.color-list:before,
+.color-list:after {
+  content: '';
+  display: table;
+}
+.color-list:after {
+  clear: both;
+}
+.color-list {
+  display: block;
+  list-style-type: none;
+  padding: 0;
+  margin: 2em 0;
+}
+.color-list li {
+  float: left;
+  margin: 1em;
+}
+.color-list span {
+  display: block;
+  width: 12em;
+  height: 7em;
+}
+.color-list b {
+  font-weight: normal;
+  font-family: monospace;
+}
+</style>
+</head>
+<body>
+
+
+
+<div id='moribus'>
+<script>
+var hexColors = ["#0b0b0b", "#180e0f", "#1b272e", "#240f0e", "#27333c", "#36434b", "#555", "#5c6b74", "#777", "#808080", "#871103", "#ace", "#ccc", "#d1c7c7", "#e1c186", "#e8d8b4", "#fafafa", "#fefefe", "#fff"];
+var rgbaColors = ["rgba(0, 0, 0, .4)", "rgba(0, 0, 0, 0.75)", "rgba(190, 190, 190, .33333)", "rgba(232, 216, 180, .5)", "rgba(43, 16, 9, 0.067)", "rgba(43, 16, 9, 0.067)"];
+</script>
+<script>
+(function(hexColors, rgbaColors, document){
+
+
+var bod = document.body;
+
+var makeColorListHtml = function(idString, ary){
+  var colorsHtml = '<ul id="' + idString + '" class="color-list">';
+  ary.forEach(function(val){
+    colorsHtml += '<li><span style="background-color: ' + val + ';"></span><b>' + val + '</b></li>'
+  });
+  colorsHtml += '</ul>';
+  return colorsHtml
+};
+
+if(rgbaColors){
+  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('rgba-colors', rgbaColors));
+}
+if(hexColors){
+  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('hex-colors', hexColors));
+}
+
+
+})(hexColors, rgbaColors, document);
+</script>
+</div>
+</body>
+</html>
