@@ -11,31 +11,47 @@ body {
   font-size: 1.2em;
   color: #444;
 }
-.color-list:before,
-.color-list:after {
+.color-list {
+  list-style-type: none;
+  margin: 2em;
+  padding: 0;
+}
+.color-list > li:before,
+.color-list > li:after {
   content: '';
   display: table;
 }
-.color-list:after {
+.color-list > li:after {
   clear: both;
 }
-.color-list {
-  display: block;
-  list-style-type: none;
-  padding: 0;
+.color-list > li {
+  padding: 2em 0;
   margin: 2em 0;
+  border-top: 1px solid #f7f7f7;
 }
-.color-list li {
+.color-list div {
   float: left;
-  margin: 1em;
+  width: 10em;
 }
 .color-list span {
-  display: block;
-  width: 12em;
+  display: inline-block;
+  width: 100%;
   height: 7em;
 }
-.color-list b {
+.color-list strong {
+  display: block;
   font-weight: normal;
+}
+.color-list ol {
+  float: left;
+  width: calc(100% - 12em);
+  padding: 0;
+  margin: 0 0 1em 2em;
+  list-style-type: none;
+}
+.color-list ol li {
+  margin: 0 0 1.4em;
+  white-space: pre;
   font-family: monospace;
 }
 </style>
@@ -46,8 +62,8 @@ body {
 
 <div id='moribus'>
 <script>
-var hexColors = ["#0b0b0b", "#180e0f", "#1b272e", "#240f0e", "#27333c", "#36434b", "#555", "#5c6b74", "#777", "#808080", "#871103", "#ace", "#ccc", "#d1c7c7", "#e1c186", "#e8d8b4", "#fafafa", "#fefefe", "#fff"];
-var rgbaColors = ["rgba(0, 0, 0, .4)", "rgba(0, 0, 0, 0.75)", "rgba(190, 190, 190, .33333)", "rgba(232, 216, 180, .5)", "rgba(43, 16, 9, 0.067)", "rgba(43, 16, 9, 0.067)"];
+var hexColors = {"#0b0b0b" : ["body {\n  color: #0b0b0b;\n}", ".price,\n.price ins {\n  color: #0b0b0b;\n}"], "#180e0f" : ["body {\n  background-color: #180e0f;\n}"], "#d1c7c7" : ["input[type=\"text\"],\ninput[type=\"email\"],\ntextarea {\n  border: 1px solid #d1c7c7;\n}"], "#fefefe" : ["input[type=\"text\"],\ninput[type=\"email\"],\ntextarea {\n  background-color: #fefefe;\n}"], "#777" : ["::-webkit-input-placeholder {\n  color: #777;\n}", "::-moz-placeholder {\n  color: #777;\n}"], "#240f0e" : ["[role=\"banner\"] {\n  background-color: #240f0e;\n}"], "#e1c186" : ["[role=\"navigation\"] a {\n  color: #e1c186;\n}"], "#27333c" : ["[role=\"navigation\"] a:hover {\n  background-color: #27333c;\n}"], "#fafafa" : [".vessel {\n  background-color: #fafafa;\n}"], "#871103" : ["[role=\"contentinfo\"] {\n  background-color: #871103;\n}", "#offer h2 {\n  background-color: #871103;\n}"], "#e8d8b4" : ["[role=\"contentinfo\"] {\n  color: #e8d8b4;\n}", "[role=\"contentinfo\"] a {\n  color: #e8d8b4;\n}", "#offer .row {\n  background-color: #e8d8b4;\n}"], "#1b272e" : ["button,\n.button {\n  border: 2px solid #1b272e;\n}"], "#36434b" : ["button,\n.button {\n  background-color: #36434b;\n}"], "#fff" : ["button,\n.button {\n  color: #fff;\n}", "#galleryModal img {\n  border: 16px solid #fff;\n}", "#galleryModal span {\n  background-color: #fff;\n}"], "#5c6b74" : ["button,\n.button {\n  text-shadow: 1px 1px 0 #5c6b74;\n}"], "#808080" : [".price del {\n  color: #808080;\n}"], "#ccc" : [".menu strong {\n  border-bottom: .1em dotted #ccc;\n}"], "#555" : [".menu small {\n  color: #555;\n}"]}
+rgbaColors = undefined;
 </script>
 <script>
 (function(hexColors, rgbaColors, document){
@@ -55,20 +71,26 @@ var rgbaColors = ["rgba(0, 0, 0, .4)", "rgba(0, 0, 0, 0.75)", "rgba(190, 190, 19
 
 var bod = document.body;
 
-var makeColorListHtml = function(idString, ary){
-  var colorsHtml = '<ul id="' + idString + '" class="color-list">';
-  ary.forEach(function(val){
-    colorsHtml += '<li><span style="background-color: ' + val + ';"></span><b>' + val + '</b></li>'
-  });
-  colorsHtml += '</ul>';
+
+var makeColorListHtml = function(idString, obj){
+  var colorsHtml = '<ol id="' + idString + '" class="color-list">';
+  for(var color in obj){
+    colorsHtml += '<li><div><span style="background-color: ' + color + ';"></span><strong>' + color + '</strong></div>';
+    colorsHtml += '<ol>';
+    obj[color].forEach(function(declaration){
+      colorsHtml += '<li>' + declaration + '</li>';
+    });
+    colorsHtml += '</ol></li>';
+  }
+  colorsHtml += '</ol>';
   return colorsHtml
 };
 
-if(rgbaColors){
-  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('rgba-colors', rgbaColors));
-}
 if(hexColors){
   document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('hex-colors', hexColors));
+}
+if(rgbaColors){
+  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('hex-colors', rgbaColors));
 }
 
 
