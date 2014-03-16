@@ -140,10 +140,10 @@ end
 
 # Old code, replace shit from template html file for creating a new one with the data
 #
-new_script = "var hexColors = #{css_hash_to_json(css_hash)};"
+new_script = "var colors = #{css_hash_to_json(css_hash)};"
 
 output_html.gsub!('{{title}}'){ file_name + '.css' }
-output_html.gsub!('<!--{{script}}-->'){ "<script>\n#{new_script}\nvar rgbaColors = undefined;</script>" }
+output_html.gsub!('<!--{{script}}-->'){ "<script>\n#{new_script}\n</script>" }
 
 
 File.write("output/#{file_name}.html", output_html)

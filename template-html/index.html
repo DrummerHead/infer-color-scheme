@@ -63,7 +63,7 @@ body {
 <div id='moribus'>
 <!--{{script}}-->
 <script>
-(function(hexColors, rgbaColors, document){
+(function(colors, document){
 
 
 var bod = document.body;
@@ -83,15 +83,12 @@ var makeColorListHtml = function(idString, obj){
   return colorsHtml
 };
 
-if(hexColors){
-  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('hex-colors', hexColors));
-}
-if(rgbaColors){
-  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('hex-colors', rgbaColors));
+if(colors){
+  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('colors', colors));
 }
 
 
-})(hexColors, rgbaColors, document);
+})(colors, document);
 </script>
 </div>
 </body>

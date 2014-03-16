@@ -62,10 +62,10 @@ body {
 
 <div id='moribus'>
 <script>
-var hexColors = {"#0b0b0b" : ["body {\n  color: #0b0b0b;\n}", ".price,\n.price ins {\n  color: #0b0b0b;\n}"], "#180e0f" : ["body {\n  background-color: #180e0f;\n}"], "#d1c7c7" : ["input[type=\"text\"],\ninput[type=\"email\"],\ntextarea {\n  border: 1px solid #d1c7c7;\n}"], "#fefefe" : ["input[type=\"text\"],\ninput[type=\"email\"],\ntextarea {\n  background-color: #fefefe;\n}"], "rgba(190, 190, 190, .33333)" : ["input[type=\"text\"],\ninput[type=\"email\"],\ntextarea {\n  box-shadow: inset 0 0 .5em rgba(190, 190, 190, .33333);\n}"], "#777" : ["::-webkit-input-placeholder {\n  color: #777;\n}", "::-moz-placeholder {\n  color: #777;\n}"], "#240f0e" : ["[role=\"banner\"] {\n  background-color: #240f0e;\n}"], "#e1c186" : ["[role=\"navigation\"] a {\n  color: #e1c186;\n}"], "#27333c" : ["[role=\"navigation\"] a:hover {\n  background-color: #27333c;\n}"], "#fafafa" : [".vessel {\n  background-color: #fafafa;\n}"], "#871103" : ["[role=\"contentinfo\"] {\n  background-color: #871103;\n}", "#offer h2 {\n  background-color: #871103;\n}"], "#e8d8b4" : ["[role=\"contentinfo\"] {\n  color: #e8d8b4;\n}", "[role=\"contentinfo\"] a {\n  color: #e8d8b4;\n}", "#offer .row {\n  background-color: #e8d8b4;\n}"], "#1b272e" : ["button,\n.button {\n  border: 2px solid #1b272e;\n}"], "#36434b" : ["button,\n.button {\n  background-color: #36434b;\n}"], "#fff" : ["button,\n.button {\n  color: #fff;\n}", "#galleryModal img {\n  border: 16px solid #fff;\n}", "#galleryModal span {\n  background-color: #fff;\n}"], "#5c6b74" : ["button,\n.button {\n  text-shadow: 1px 1px 0 #5c6b74;\n}"], "rgba(43, 16, 9, 0.067)" : [".submit-area {\n  background-color: rgba(43, 16, 9, 0.067);\n}", ".submit-area {\n  border: 1px solid rgba(43, 16, 9, 0.067);\n}"], "#808080" : [".price del {\n  color: #808080;\n}"], "#ccc" : [".menu strong {\n  border-bottom: .1em dotted #ccc;\n}"], "#555" : [".menu small {\n  color: #555;\n}"], "rgba(0, 0, 0, 0.75)" : ["#galleryModalBackground {\n  background-color: rgba(0, 0, 0, 0.75);\n}"], "rgba(0, 0, 0, .4)" : ["#galleryModal span {\n  box-shadow: 0 0 .25em rgba(0, 0, 0, .4);\n}"]};
-var rgbaColors = undefined;</script>
+var colors = {"#0b0b0b" : ["body {\n  color: #0b0b0b;\n}", ".price,\n.price ins {\n  color: #0b0b0b;\n}"], "#180e0f" : ["body {\n  background-color: #180e0f;\n}"], "#d1c7c7" : ["input[type=\"text\"],\ninput[type=\"email\"],\ntextarea {\n  border: 1px solid #d1c7c7;\n}"], "#fefefe" : ["input[type=\"text\"],\ninput[type=\"email\"],\ntextarea {\n  background-color: #fefefe;\n}"], "rgba(190, 190, 190, .33333)" : ["input[type=\"text\"],\ninput[type=\"email\"],\ntextarea {\n  box-shadow: inset 0 0 .5em rgba(190, 190, 190, .33333);\n}"], "#777" : ["::-webkit-input-placeholder {\n  color: #777;\n}", "::-moz-placeholder {\n  color: #777;\n}"], "#240f0e" : ["[role=\"banner\"] {\n  background-color: #240f0e;\n}"], "#e1c186" : ["[role=\"navigation\"] a {\n  color: #e1c186;\n}"], "#27333c" : ["[role=\"navigation\"] a:hover {\n  background-color: #27333c;\n}"], "#fafafa" : [".vessel {\n  background-color: #fafafa;\n}"], "#871103" : ["[role=\"contentinfo\"] {\n  background-color: #871103;\n}", "#offer h2 {\n  background-color: #871103;\n}"], "#e8d8b4" : ["[role=\"contentinfo\"] {\n  color: #e8d8b4;\n}", "[role=\"contentinfo\"] a {\n  color: #e8d8b4;\n}", "#offer .row {\n  background-color: #e8d8b4;\n}"], "#1b272e" : ["button,\n.button {\n  border: 2px solid #1b272e;\n}"], "#36434b" : ["button,\n.button {\n  background-color: #36434b;\n}"], "#fff" : ["button,\n.button {\n  color: #fff;\n}", "#galleryModal img {\n  border: 16px solid #fff;\n}", "#galleryModal span {\n  background-color: #fff;\n}"], "#5c6b74" : ["button,\n.button {\n  text-shadow: 1px 1px 0 #5c6b74;\n}"], "rgba(43, 16, 9, 0.067)" : [".submit-area {\n  background-color: rgba(43, 16, 9, 0.067);\n}", ".submit-area {\n  border: 1px solid rgba(43, 16, 9, 0.067);\n}"], "#808080" : [".price del {\n  color: #808080;\n}"], "#ccc" : [".menu strong {\n  border-bottom: .1em dotted #ccc;\n}"], "#555" : [".menu small {\n  color: #555;\n}"], "rgba(0, 0, 0, 0.75)" : ["#galleryModalBackground {\n  background-color: rgba(0, 0, 0, 0.75);\n}"], "rgba(0, 0, 0, .4)" : ["#galleryModal span {\n  box-shadow: 0 0 .25em rgba(0, 0, 0, .4);\n}"]};
+</script>
 <script>
-(function(hexColors, rgbaColors, document){
+(function(colors, document){
 
 
 var bod = document.body;
@@ -85,15 +85,12 @@ var makeColorListHtml = function(idString, obj){
   return colorsHtml
 };
 
-if(hexColors){
-  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('hex-colors', hexColors));
-}
-if(rgbaColors){
-  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('hex-colors', rgbaColors));
+if(colors){
+  document.body.insertAdjacentHTML('afterbegin', makeColorListHtml('colors', colors));
 }
 
 
-})(hexColors, rgbaColors, document);
+})(colors, document);
 </script>
 </div>
 </body>
