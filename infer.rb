@@ -90,17 +90,19 @@ puts "\n\n==============\n\n"
 def css_hash_to_json(css_hash)
   hash = {}
   hex_color_regex = /(#[\da-f]{3})([\da-f]{3})?/
+  rgba_color_regex = /rgba?\([^)]*\)/
 
   css_hash.each do | selector, block |
     block.each do | property, value |
-      if value =~ hex_color_regex
-        color_from_value = value.scan(hex_color_regex).map{ |x, y| x + (y || '')}[0]
+
+      color_from_value = value.scan(hex_color_regex).map{ |x, y| x + (y || '')}[0] || value.scan(rgba_color_regex)[0]
+      if color_from_value
         if hash[color_from_value] == nil
           hash[color_from_value] = []
         end
         hash[color_from_value] << "#{selector.gsub(/[\s]*,[\s]*/){",\n"}.gsub(/'/m){'"'}} {\n  #{property}: #{value};\n}"
-        #json_string << "'#{value.scan(hex_color_regex).map{ |x, y| x + (y || '')}[0]}' : '#{selector.gsub(/[\s]*,[\s]*/){",\n"}.gsub(/'/m){'"'}} {\n  #{property}: #{value};\n}', "
       end
+
     end
   end
   json_string = hash.to_s.gsub(/=>/){" : "}
@@ -138,10 +140,10 @@ end
 
 # Old code, replace shit from template html file for creating a new one with the data
 #
-new_script = "var hexColors = #{css_hash_to_json(css_hash)}"
+new_script = "var hexColors = #{css_hash_to_json(css_hash)};"
 
 output_html.gsub!('{{title}}'){ file_name + '.css' }
-output_html.gsub!('<!--{{script}}-->'){ "<script>\n#{new_script}\n</script>" }
+output_html.gsub!('<!--{{script}}-->'){ "<script>\n#{new_script}\nvar rgbaColors = undefined;</script>" }
 
 
 File.write("output/#{file_name}.html", output_html)
